@@ -1,0 +1,60 @@
+//optimal - kadane's algo TC - O(N) SC - O(1)
+THE LOGIC IS INITIALISE SUM = 0 AND ITEREATE THROUGH ARRAY IF SUM < 0 THEN RESET SUM = 0. NOW IF SUM > MAX THEN MAX = SUM AND RETURN IT
+
+class Solution {
+    public int maxSubArray(int[] nums) {
+        
+        int maxSum = Integer.MIN_VALUE;
+        int sum = 0;
+        
+        int start = 0;
+        int ansStart = -1;
+        int ansEnd = -1;
+
+        for (int i = 0; i < nums.length; i++) {
+            
+            if (sum == 0) {
+                start = i;
+            }
+            
+            sum += nums[i];
+            
+            if (sum > maxSum) {
+                maxSum = sum;
+                ansStart = start;
+                ansEnd = i;
+            }
+            
+            if (sum < 0) {
+                sum = 0;
+            }
+        }
+        
+        System.out.println("Subarray starts at index: " + ansStart);
+        System.out.println("Subarray ends at index: " + ansEnd);
+        
+        return maxSum;
+    }
+}
+
+
+
+//Better tc- o(n^2)
+class Solution {
+    public int maxSubArray(int[] nums) {
+        int max = 0;
+        for(int i = 0;i<nums.length;i++)
+        {
+            int sum = 0;
+            for(int j = i; j<nums.length;j++)
+            {
+                sum += nums[j];
+                if(sum>max)
+                {
+                    max = sum;
+                }
+            }
+        }
+        return max;
+    }
+}
